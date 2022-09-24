@@ -1,0 +1,6 @@
+/home/user/Documents/Programming/CodeKnacker/CodeKnacker/bin/Debug/CodeKnacker.exe
+/home/user/Documents/Programming/CodeKnacker/CodeKnacker/bin/Debug/CodeKnacker.pdb
+/home/user/Documents/Programming/CodeKnacker/CodeKnacker/obj/x86/Debug/CodeKnacker.csproj.AssemblyReference.cache
+/home/user/Documents/Programming/CodeKnacker/CodeKnacker/obj/x86/Debug/CodeKnacker.csproj.CoreCompileInputs.cache
+/home/user/Documents/Programming/CodeKnacker/CodeKnacker/obj/x86/Debug/CodeKnacker.exe
+/home/user/Documents/Programming/CodeKnacker/CodeKnacker/obj/x86/Debug/CodeKnacker.pdb

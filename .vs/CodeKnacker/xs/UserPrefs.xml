@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{D0EA77C1-8E27-4870-BBAD-7C3BB94D4AF0}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CodeKnacker/Program.cs">
+    <Files>
+      <File FileName="CodeKnacker/Program.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CodeKnacker" expanded="True">
+            <Node name="CodeKnacker" expanded="True">
+              <Node name="Program.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.CodeKnacker PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
