@@ -4,7 +4,7 @@ namespace CodeKnacker
 {
     class MainClass
     {
-        // Check if a input string can be converter into an integer by using a try/catch statement
+        // Check if a input string can be converted into an integer by using a try/catch statement
         private static bool CanConvert(string num)
         { 
         int CNum;
@@ -22,8 +22,9 @@ namespace CodeKnacker
         // You're given a secret number and you have to guess it
         // Try to use as few guesses as possible
         // After each guess you get told if you guess is correct, smaller or greater than the secret number
-        private static bool GuessTheNumber()
+        private static void GuessTheNumber()
         {
+            Random RND = new Random();
             int Number;
             int IGuess;
             int UserTries;
@@ -31,7 +32,8 @@ namespace CodeKnacker
             string Guess;
             Guessed = false;
             UserTries = 0;
-            Number = 15;
+            // Generates a "random" number from 0 to 2147483647 (Impossible to Guess)
+            Number = RND.Next();
 
             while (Guessed != true) {
                 Console.WriteLine("Enter number: ");
@@ -60,15 +62,14 @@ namespace CodeKnacker
 
 
             }
-            return false;
         }
 
         public static void Main(string[] args)
         {
-            // Variant_3's Instructions already used in Variant_1 and Variant_2
             string Version;
-            Version = "0.2 Variant_2";
+            Version = "0.5 Variant_5 (unbeatable)";
             Console.WriteLine("Welcome to CodeKnacker!\nVersion: {0}\n\n", Version);
+            // Call Game Method
             GuessTheNumber();
         }
     }
