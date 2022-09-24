@@ -19,7 +19,7 @@ namespace CodeKnacker
         private static bool GuessTheNumber()
         {
             int Number;
-            int INumber;
+            int IGuess;
             bool Guessed;
             string Guess;
             Guessed = false;
@@ -29,15 +29,22 @@ namespace CodeKnacker
                 Guess = Console.ReadLine();
                 if (CanConvert(Guess))
                 {
-                    INumber = Convert.ToInt32(Guess);
-                    if (Number == INumber) {
+                    IGuess = Convert.ToInt32(Guess);
+                    if (Number == IGuess) {
                         Console.WriteLine("Congratulations, you guessed the right number\n\nPress any key to exit...");
                         Console.ReadKey();
                         Guessed = true;
                     }
                     else {
-                        Console.WriteLine("{0} is not the number you're looking for, try again\n", INumber);
-                    
+                        if (IGuess > Number)
+                        {
+                            Console.WriteLine("{0} is greater than the number you're looking for, try again\n", IGuess);
+
+                        }
+                        else {
+                            Console.WriteLine("{0} is smaller than the number you're looking for, try again\n", IGuess);
+                        }
+
                     }
                 }
 
@@ -49,7 +56,7 @@ namespace CodeKnacker
         public static void Main(string[] args)
         {
             string Version;
-            Version = "0.1 Variant_1";
+            Version = "0.2 Variant_2";
             Console.WriteLine("Welcome to CodeKnacker!\nVersion: {0}\n\n", Version);
             GuessTheNumber();
         }
