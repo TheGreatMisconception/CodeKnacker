@@ -21,20 +21,26 @@ namespace CodeKnacker
         // GuessTheNumber
         // You're given a secret number and you have to guess it
         // Try to use as few guesses as possible
-        // After each guess you get told if you guess is correct, smaller or greater than the secret number
+        // After each guess you get told if your guess is correct, smaller or greater than the secret number
         private static void GuessTheNumber()
         {
+            // Variabal decleration
             Random RND = new Random();
             int Number;
             int IGuess;
             int UserTries;
             bool Guessed;
             string Guess;
+            // Variabal definition
             Guessed = false;
             UserTries = 0;
-            // Generates a "random" number from 0 to 2147483647 (Impossible to Guess)
-            Number = RND.Next();
+            // By using % we can specify the range of random numbers.
+            // That works by getting the remainder of a division.
+            // % 1001 would therefore cover the range 1 to 1000
+            Number = RND.Next() % 1001;
+            Console.WriteLine(Number);
 
+            // Logic
             while (Guessed != true) {
                 Console.WriteLine("Enter number: ");
                 Guess = Console.ReadLine();
