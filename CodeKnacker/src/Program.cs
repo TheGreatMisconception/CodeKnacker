@@ -29,22 +29,16 @@ namespace CodeKnacker
 
             if (Input.ToLower() == "y") {
                 Min = Max = "#";
-                if (CanConvert(Min) && CanConvert(Max)) {
-                    if (Convert.ToInt32(Min) > Convert.ToInt32(Max)) {
-                        Logic = false;
+                while (CanConvert(Min) != true || CanConvert(Max) != true || Logic == false) {
+                    if (CanConvert(Min) && CanConvert(Max)) {
+                        Logic = Convert.ToInt32(Min) > Convert.ToInt32(Max) ? false : true;
                     }
-                    else {
-                        Logic = true;
-                    }
-                }
-                while (CanConvert(Min) != true || CanConvert(Max) != true && Logic == false) {
-                    Console.WriteLine("1");
                     if (CanConvert(Min) != true)
                     {
                         Console.WriteLine("Min: ");
                         Min = Console.ReadLine();
                     }
-                    if (CanConvert(Max) != true)
+                    if (CanConvert(Max) != true || Logic == false)
                     {
                         Console.WriteLine("Max: ");
                         Max = Console.ReadLine();
