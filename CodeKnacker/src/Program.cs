@@ -17,8 +17,10 @@ namespace CodeKnacker
             return true;
         }
 
-
-        // GuessTheNumber
+        // ##################
+        // ##GuessTheNumber##
+        // ##################
+        // Explanation:
         // You're given a secret number and you have to guess it
         // Try to use as few guesses as possible
         // After each guess you get told if your guess is correct, smaller or greater than the secret number
@@ -36,7 +38,11 @@ namespace CodeKnacker
             UserTries = 0;
             // By using % we can specify the range of random numbers.
             // That works by getting the remainder of a division.
-            // % 1001 would therefore cover the range 1 to 1000
+            // % 1001 would therefore cover the range 0 to 1000
+            // % 1000 would only cover 0 to 999
+            // In order to increase the minimum value, we just need to add the wanted minimum value to the to the remainder.
+            // Keep in mind that your maximum value increases by the same amount as well.
+            // Example: (RND.Next % 101) + 100 would correspond to the following range: 100 -> 200
             Number = RND.Next() % 1001;
             Console.WriteLine(Number);
 
@@ -73,7 +79,7 @@ namespace CodeKnacker
         public static void Main(string[] args)
         {
             string Version;
-            Version = "0.5 Variant_5 (unbeatable)";
+            Version = "0.6 Variant_6";
             Console.WriteLine("Welcome to CodeKnacker!\nVersion: {0}\n\n", Version);
             // Call Game Method
             GuessTheNumber();
