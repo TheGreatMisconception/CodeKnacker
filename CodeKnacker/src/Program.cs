@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace CodeKnacker
 {
@@ -6,18 +6,21 @@ namespace CodeKnacker
     {
         // Check if a input string can be converted into an integer by using a try/catch statement
         private static bool CanConvert(string num)
-        { 
-        int CNum;
-            try { 
+        {
+            int CNum;
+            try
+            {
                 CNum = Convert.ToInt32(num);
             }
-            catch {
+            catch
+            {
                 return false;
             }
             return true;
         }
 
-        private static int[] GetUserRange(int MinDefault, int MaxDefault) {
+        private static int[] GetUserRange(int MinDefault, int MaxDefault)
+        {
             string Min;
             string Max;
             string Input;
@@ -27,10 +30,13 @@ namespace CodeKnacker
             Console.WriteLine("Do you want to specifiy the number range yourself or use the defaults? (default: [0, 100])\n\nY/n: ");
             Input = Console.ReadLine();
 
-            if (Input.ToLower() == "y") {
+            if (Input.ToLower() == "y")
+            {
                 Min = Max = "#";
-                while (CanConvert(Min) != true || CanConvert(Max) != true || Logic == false) {
-                    if (CanConvert(Min) && CanConvert(Max)) {
+                while (CanConvert(Min) != true || CanConvert(Max) != true || Logic == false)
+                {
+                    if (CanConvert(Min) && CanConvert(Max))
+                    {
                         Logic = Convert.ToInt32(Min) > Convert.ToInt32(Max) ? false : true;
                     }
                     if (CanConvert(Min) != true)
@@ -46,11 +52,31 @@ namespace CodeKnacker
                 }
                 return new int[] { Convert.ToInt32(Min), Convert.ToInt32(Max) };
             }
-            else {
+            else
+            {
                 Console.WriteLine("using defaults....\n\n");
                 return new int[] { MinDefault, MaxDefault };
             }
         }
+
+
+        private static string CalcScore(int[] Range, int Attempts) {
+            int AverageScore;
+            AverageScore = Convert.ToInt32(Math.Round(Math.Log(Range[1]- Range[0]) / Math.Log(2)));
+            if (Attempts > AverageScore)
+            {
+                return "You're worse than the average person!";
+            }
+            else if (Attempts < AverageScore)
+            {
+                return $"Woah, you're better than the average person by only using {Attempts}";
+            }
+            else {
+                return "You scored average";
+            }
+        }
+
+
 
         // ##################
         // ##GuessTheNumber##
@@ -77,24 +103,28 @@ namespace CodeKnacker
             UserRange = GetUserRange(0, 100);
             Number = RND.Next(UserRange[0], UserRange[1]);
             // Logic
-            while (Guessed != true) {
+            while (Guessed != true)
+            {
                 Console.WriteLine("Enter number: ");
                 Guess = Console.ReadLine();
                 if (CanConvert(Guess))
                 {
                     IGuess = Convert.ToInt32(Guess);
                     UserTries += 1;
-                    if (Number == IGuess) {
-                        Console.WriteLine("Congratulations, you guessed the right number ({0} Attempts)\n\nPress any key to exit...", UserTries);
+                    if (Number == IGuess)
+                    {
+                        Console.WriteLine("Congratulations, you guessed the right number.{0}\n\nPress any key to exit...", CalcScore(UserRange, UserTries));
                         Console.ReadKey();
                         Guessed = true;
                     }
-                    else {
+                    else
+                    {
                         if (IGuess > Number)
                         {
                             Console.WriteLine("{0} is greater than the number you're looking for, try again\n", IGuess);
                         }
-                        else {
+                        else
+                        {
                             Console.WriteLine("{0} is smaller than the number you're looking for, try again\n", IGuess);
                         }
 
@@ -106,7 +136,7 @@ namespace CodeKnacker
         public static void Main(string[] args)
         {
             string Version;
-            Version = "0.7 Variant_7";
+            Version = "0.8 Variant_8";
             Console.WriteLine("Welcome to CodeKnacker!\nVersion: {0}\n\n", Version);
             // Call Game Method
             GuessTheNumber();
