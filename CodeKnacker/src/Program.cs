@@ -1,145 +1,87 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CodeKnacker
 {
-    class MainClass
+    class Program
     {
-        // Check if a input string can be converted into an integer by using a try/catch statement
-        private static bool CanConvert(string num)
-        {
-            int CNum;
+        private static bool CanConvert(string Num) {
             try
             {
-                CNum = Convert.ToInt32(num);
+                Convert.ToInt32(Num);
             }
-            catch
-            {
-                return false;
+            catch {
+                Console.WriteLine("Your Input is not a valid number, try again");
+                return false;            
             }
             return true;
         }
+        private static int[] GetUserNumber() {
+            string Number;
+            string RangeMin;
+            string RangeMax;
+            bool CorrectInput;
+            CorrectInput = false;
+            Number = "lol";
+            RangeMin = RangeMax = "!"; // shitty ide doesnt get variable definition within while loop
+            while (CorrectInput != true) {
+                Console.WriteLine("Please enter you're secret number");
+                Number = Console.ReadLine();
+                Console.WriteLine("Please the minimum range in which the number is present:");
+                RangeMin = Console.ReadLine();
+                Console.WriteLine("Please the maximum range in which the number is present:");
+                RangeMax = Console.ReadLine();
 
-        private static int[] GetUserRange(int MinDefault, int MaxDefault)
-        {
-            string Min;
-            string Max;
-            string Input;
-            bool Logic;
-            Logic = false;
-
-            Console.WriteLine("Do you want to specifiy the number range yourself or use the defaults? (default: [0, 100])\n\nY/n: ");
-            Input = Console.ReadLine();
-
-            if (Input.ToLower() == "y")
-            {
-                Min = Max = "#";
-                while (CanConvert(Min) != true || CanConvert(Max) != true || Logic == false)
-                {
-                    if (CanConvert(Min) && CanConvert(Max))
-                    {
-                        Logic = Convert.ToInt32(Min) > Convert.ToInt32(Max) ? false : true;
-                    }
-                    if (CanConvert(Min) != true)
-                    {
-                        Console.WriteLine("Min: ");
-                        Min = Console.ReadLine();
-                    }
-                    if (CanConvert(Max) != true || Logic == false)
-                    {
-                        Console.WriteLine("Max: ");
-                        Max = Console.ReadLine();
-                    }
+                if (CanConvert(Number) && CanConvert(RangeMin) && CanConvert(RangeMax)) {
+                    CorrectInput = true;
                 }
-                return new int[] { Convert.ToInt32(Min), Convert.ToInt32(Max) };
             }
-            else
-            {
-                Console.WriteLine("using defaults....\n\n");
-                return new int[] { MinDefault, MaxDefault };
-            }
+            return new int[] { Convert.ToInt32(Number), Convert.ToInt32(RangeMin),  Convert.ToInt32(RangeMax)};
         }
 
-
-        private static string CalcScore(int[] Range, int Attempts) {
-            int AverageScore;
-            AverageScore = Convert.ToInt32(Math.Round(Math.Log(Range[1]- Range[0]) / Math.Log(2)));
-            if (Attempts > AverageScore)
-            {
-                return "You're worse than the average person!";
-            }
-            else if (Attempts < AverageScore)
-            {
-                return $"Woah, you're better than the average person by only using {Attempts}";
-            }
-            else {
-                return "You scored average";
-            }
-        }
-
-
-
-        // ##################
-        // ##GuessTheNumber##
-        // ##################
-        // Explanation:
-        // You're given a secret number and you have to guess it
-        // Try to use as few guesses as possible
-        // After each guess you get told if your guess is correct, smaller or greater than the secret number
-        private static void GuessTheNumber()
-        {
-            // Variabal decleration
-            Random RND = new Random();
-            int Number;
-            int IGuess;
-            int[] UserRange;
-            int UserTries;
+        private static void IGuessTheNumber() {
+            int[] MyRange;
+            var RND = new Random();
+            int Random;
+            string Input;
             bool Guessed;
-            string Guess;
-            // Variabal definition
+            Input = "!";
             Guessed = false;
-            UserTries = 0;
-            // Call GetUserRange Method and pass default range integers to it. If user denies a custom range, these will be used.
-            // GetUserRange returns a Interger array which contains a minimum value and a maximum value
-            UserRange = GetUserRange(0, 100);
-            Number = RND.Next(UserRange[0], UserRange[1]);
-            // Logic
+            MyRange = GetUserNumber();
             while (Guessed != true)
             {
-                Console.WriteLine("Enter number: ");
-                Guess = Console.ReadLine();
-                if (CanConvert(Guess))
+                Random = RND.Next(MyRange[1], MyRange[2]);
+                Console.WriteLine($"Is your number smaller or greater than {Random}?");
+                Console.WriteLine("l/g/=");
+                while (Input != "g" || Input != "l" || Input != "=")
                 {
-                    IGuess = Convert.ToInt32(Guess);
-                    UserTries += 1;
-                    if (Number == IGuess)
+                    Input = Console.ReadLine();
+                    Input = Input.ToLower();
+
+                    if (Input == "g")
                     {
-                        Console.WriteLine("Congratulations, you guessed the right number.{0}\n\nPress any key to exit...", CalcScore(UserRange, UserTries));
-                        Console.ReadKey();
-                        Guessed = true;
+                        MyRange[1] = Random;
+                    }
+                    else if (Input == "l")
+                    {
+                        MyRange[2] = Random;
                     }
                     else
                     {
-                        if (IGuess > Number)
-                        {
-                            Console.WriteLine("{0} is greater than the number you're looking for, try again\n", IGuess);
-                        }
-                        else
-                        {
-                            Console.WriteLine("{0} is smaller than the number you're looking for, try again\n", IGuess);
-                        }
-
+                        Console.WriteLine("COOOOOOL\n\nPress any key to exit....");
+                        Console.ReadKey();
+                        Guessed = true;
                     }
                 }
             }
         }
 
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
-            string Version;
-            Version = "0.9 Variant_9";
-            Console.WriteLine("Welcome to CodeKnacker!\nVersion: {0}\n\n", Version);
-            // Call Game Method
-            GuessTheNumber();
+            IGuessTheNumber();
         }
     }
 }
