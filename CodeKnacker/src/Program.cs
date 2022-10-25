@@ -395,11 +395,11 @@ namespace CodeKnacker
             AverageScore = Convert.ToInt32(Math.Round(Math.Log(Range[1] - Range[0]) / Math.Log(2)));
             if (Attempts > AverageScore)
             {
-                return "You're worse than the average person!";
+                return "You scored worse than the average person!";
             }
             else if (Attempts < AverageScore)
             {
-                return $"Woah, you're better than the average person by only using {Attempts}";
+                return $"Woah, you scored better than the average person by only using {Attempts}";
             }
             else
             {
@@ -454,6 +454,60 @@ namespace CodeKnacker
             }
         }
 
+        private static int[] GetUserNumber()
+        {
+            string RangeMin;
+            string RangeMax;
+            bool CorrectInput;
+            CorrectInput = false;
+            RangeMin = RangeMax = "!"; // shitty ide doesnt recognize variable definition within while loop
+            while (CorrectInput != true)
+            {
+                Console.Write("minimum range in which the number is present:");
+                RangeMin = Console.ReadLine();
+                Console.Write("maximum range in which the number is present:");
+                RangeMax = Console.ReadLine();
+
+                if (CanConvert(RangeMin) && CanConvert(RangeMax))
+                {
+                    CorrectInput = true;
+                }
+            }
+            return new int[] { Convert.ToInt32(RangeMin), Convert.ToInt32(RangeMax) };
+        }
+
+        private static void IGuessTheNumber()
+        {
+            int[] MyRange;
+            var RND = new Random();
+            int Random;
+            string Input;
+            bool Guessed;
+            Input = "!";
+            Guessed = false;
+            MyRange = GetUserNumber();
+            while (Guessed != true)
+            {
+                Random = RND.Next(MyRange[0], MyRange[1]);
+                Console.Write($"[{Random}]  =/l/g/>");
+                Input = Console.ReadLine();
+                if (Input == "g")
+                {
+                    MyRange[1] = Random;
+                }
+                else if (Input == "l")
+                {
+                    MyRange[2] = Random;
+                }
+                else if (Input == "=")
+                {
+                    Console.WriteLine("\nEye, Eye Sir\n\nPress any key to exit....");
+                    Console.ReadKey();
+                    Guessed = true;
+                }
+              }
+           }
+
         // TODO
         /*
             - Implement Shell parameters
@@ -466,7 +520,7 @@ namespace CodeKnacker
             string[] Variants = { "Hardcoded Secretnumber", "Computer Feedback: smaller or greater", "Interactive Respones", "Computer Feedback: Attempts", "Random Generated Secretnumber", "Limited Random Number from 1000 to 10000", "User Specifed Range", "Computer Feedback: Hardcoded Good, Bad, Average", "Computer Feedback: logarithm", "Computer Guesses the Number", "Shows Random Number thats is greater than 10.000.000.000"};
             Version = "0.1a";
             Exit = false;
-            string HelpCommand = $"Welcome to CodeKnacker!\nVersion: {Version}\n\nThere are currently {Variants.Length} Variants.\nOptions:\nd = display all variants and its description\nx = Variant  (x is the name of the variant)\n! = exit the program\n? = This help message\nclr = clear the screen by 150 lines\n";
+            string HelpCommand = $"Welcome to CodeKnacker!\nVersion: {Version}\n\nThere are currently {Variants.Length} Variants.\nOptions:\nd = display all variants and its description\nx = Variant  (x is the name of the variant)\n! = exit the program\n? = This help message\nsource = displays url to source\nclr = clear the screen by 150 lines\n";
             Console.WriteLine(HelpCommand);
             while (Exit != true) {
                 string Input;
@@ -494,7 +548,7 @@ namespace CodeKnacker
                 {
                     int GameVariant;
                     GameVariant = Convert.ToInt32(Input);
-                    if      (GameVariant == 1) { Variant1(); }
+                    if (GameVariant == 1) { Variant1(); }
                     else if (GameVariant == 2) { Variant2(); }
                     else if (GameVariant == 3) { Variant3(); }
                     else if (GameVariant == 4) { Variant4(); }
@@ -503,10 +557,11 @@ namespace CodeKnacker
                     else if (GameVariant == 7) { Variant7(); }
                     else if (GameVariant == 8) { Variant8(); }
                     else if (GameVariant == 9) { Variant9(); }
-                    else if (GameVariant == 10) { Console.WriteLine("Not Yet Implemented"); } // change to zusatzaufgabe 1
+                    else if (GameVariant == 10) { IGuessTheNumber(); } // change to zusatzaufgabe 1
                     else if (GameVariant == 11) { Console.WriteLine("Not Yet Implemented"); }
                 }
                 else if (Input.ToLower() == "clr") { for (int x = 0; x < 150; x++) { Console.WriteLine("\n"); } }
+                else if (Input.ToLower() == "source") { Console.WriteLine("https://github.com/TheGreatMisconception/CodeKnacker/tree/Finished"); }
                 else { Console.WriteLine("Error: Command not recognized"); }
             }
         }
