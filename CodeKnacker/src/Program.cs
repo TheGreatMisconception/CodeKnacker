@@ -34,7 +34,7 @@ namespace CodeKnacker
                 if (Convert.ToInt32(Guess) == SecretNumber) { Console.WriteLine("Congratulations, you guessed the right number!"); }
                 else { Console.WriteLine("{0} is not the number you're looking for.", Convert.ToInt32(Guess)); }
             }
-            else 
+            else
             {
                 Console.WriteLine("{0} is not a valid number.", Guess);
             }
@@ -51,7 +51,7 @@ namespace CodeKnacker
             Guess = Console.ReadLine();
             if (CanConvert(Guess))
             {
-                if (Convert.ToInt32(Guess) == SecretNumber)     { Console.WriteLine("Congratulations, you guessed the right number!"); }
+                if (Convert.ToInt32(Guess) == SecretNumber) { Console.WriteLine("Congratulations, you guessed the right number!"); }
                 else if (Convert.ToInt32(Guess) < SecretNumber) { Console.WriteLine("{0} is smaller than the number you're looking for.", Convert.ToInt32(Guess)); }
                 else if (Convert.ToInt32(Guess) > SecretNumber) { Console.WriteLine("{0} is greater than the number you're looking for.", Convert.ToInt32(Guess)); }
             }
@@ -272,7 +272,7 @@ namespace CodeKnacker
                         Max = Console.ReadLine();
                     }
                 }
-                return new int[] { Convert.ToInt32(Min), Convert.ToInt32(Max), 1};
+                return new int[] { Convert.ToInt32(Min), Convert.ToInt32(Max), 1 };
             }
             else
             {
@@ -368,7 +368,8 @@ namespace CodeKnacker
                         {
                             Console.WriteLine("Congratulations, you guessed the right number and scored worse than average({0} Attempts)\n\nPress any key to exit...", UserTries);
                         }
-                        else {
+                        else
+                        {
                             Console.WriteLine("Congratulations, you guessed the right number.({0} Attempts)\n\nPress any key to exit...", UserTries);
                         }
                         Console.ReadKey();
@@ -505,8 +506,25 @@ namespace CodeKnacker
                     Console.ReadKey();
                     Guessed = true;
                 }
-              }
-           }
+            }
+        }
+
+
+        private static void NewNumbers()
+        {
+            Random RND = new Random();
+            Console.WriteLine("2x 32bit random numbers concatinated\n");
+            for (int i = 0; i < 201; i++)
+            {
+                Console.WriteLine($"{RND.Next(0, 900000)}{RND.Next(0, 900000)}");
+            }
+            for (int i = 0; i < 201; i++)
+            {
+                Console.WriteLine();
+            }
+
+
+        }
 
         // TODO
         /*
@@ -515,14 +533,13 @@ namespace CodeKnacker
          */
         static void Main(string[] args)
         {
-            string Version;
             bool Exit;
-            string[] Variants = { "Hardcoded Secretnumber", "Computer Feedback: smaller or greater", "Interactive Respones", "Computer Feedback: Attempts", "Random Generated Secretnumber", "Limited Random Number from 1000 to 10000", "User Specifed Range", "Computer Feedback: Hardcoded Good, Bad, Average", "Computer Feedback: logarithm", "Computer Guesses the Number", "Shows Random Number thats is greater than 10.000.000.000"};
-            Version = "0.1a";
+            string[] Variants = { "Hardcoded Secretnumber", "Computer Feedback: smaller or greater", "Interactive Respones", "Computer Feedback: Attempts", "Random Generated Secretnumber", "Limited Random Number from 1000 to 10000", "User Specifed Range", "Computer Feedback: Hardcoded Good, Bad, Average", "Computer Feedback: logarithm", "Computer Guesses the Number", "Shows Random Number thats is greater than 10.000.000.000" };
             Exit = false;
-            string HelpCommand = $"Welcome to CodeKnacker!\nVersion: {Version}\n\nThere are currently {Variants.Length} Variants.\nOptions:\nd = display all variants and its description\nx = Variant  (x is the name of the variant)\n! = exit the program\n? = This help message\nsource = displays url to source\nclr = clear the screen by 150 lines\n";
+            string HelpCommand = $"Welcome to CodeKnacker!\n\nOptions:\nd = display all variants and its description\nx = Variant  (x is the name of the variant)\n! = exit the program\n? = This help message\nsource = displays url to source\nclrs = clear the screen by 150 lines\n";
             Console.WriteLine(HelpCommand);
-            while (Exit != true) {
+            while (Exit != true)
+            {
                 string Input;
                 Console.Write(">");
                 Input = Console.ReadLine();
@@ -533,14 +550,8 @@ namespace CodeKnacker
                     Console.WriteLine("IndexName    Description\n");
                     for (int i = 0; i < Variants.Length; i++)
                     {
-                        if (i > 8)
-                        {
-                            Console.WriteLine($"{i + 1}           {Variants[i]}");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"{i + 1}            {Variants[i]}");
-                        }
+                        if (i > 8) { Console.WriteLine($"{i + 1}           {Variants[i]}"); }
+                        else { Console.WriteLine($"{i + 1}            {Variants[i]}"); }
                     }
                     Console.WriteLine("\n");
                 }
@@ -558,11 +569,12 @@ namespace CodeKnacker
                     else if (GameVariant == 8) { Variant8(); }
                     else if (GameVariant == 9) { Variant9(); }
                     else if (GameVariant == 10) { IGuessTheNumber(); } // change to zusatzaufgabe 1
-                    else if (GameVariant == 11) { Console.WriteLine("Not Yet Implemented"); }
+                    else if (GameVariant == 11) { NewNumbers(); }
                 }
-                else if (Input.ToLower() == "clr") { for (int x = 0; x < 150; x++) { Console.WriteLine("\n"); } }
+                else if (Input.ToLower() == "")       { continue; }
+                else if (Input.ToLower() == "clrs")   { for (int x = 0; x < 150; x++) { Console.WriteLine("\n"); } }
                 else if (Input.ToLower() == "source") { Console.WriteLine("https://github.com/TheGreatMisconception/CodeKnacker/tree/Finished"); }
-                else { Console.WriteLine("Error: Command not recognized"); }
+                else                                  { Console.WriteLine($"Error: Command \"{Input}\" not found"); }
             }
         }
     }
